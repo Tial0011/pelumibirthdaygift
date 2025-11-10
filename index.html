@@ -28,28 +28,17 @@
         }
       }
 
+      /* ===== NEW SLIDESHOW STYLING ===== */
       .slideshow {
+        position: absolute;
+        inset: 0;
         background-size: cover;
+        background-repeat: no-repeat;
         background-position: center;
-        animation: slideShow 18s infinite linear;
-        filter: blur(18px);
-      }
-      @keyframes slideShow {
-        0%,
-        33% {
-          background-image: url("bg1.jpg");
-        }
-        34%,
-        66% {
-          background-image: url("bg2.jpg");
-        }
-        67%,
-        100% {
-          background-image: url("bg3.jpg");
-        }
+        filter: blur(6px);
+        transition: background-image 1s ease-in-out;
       }
 
-      /* smooth fade for letters */
       #letterContent {
         transition: opacity 0.45s ease;
       }
@@ -59,17 +48,17 @@
   <body
     class="relative min-h-screen flex items-center justify-center p-6 overflow-hidden"
   >
-    <!-- Blurry Background Slideshow -->
-    <div class="absolute inset-0 slideshow pointer-events-none"></div>
+    <!-- Background Slideshow -->
+    <div class="slideshow pointer-events-none"></div>
 
-    <!-- Pink Tint Overlay -->
+    <!-- Pink Overlay -->
     <div
       class="absolute inset-0 bg-pink-200/45 backdrop-blur-sm pointer-events-none"
     ></div>
 
-    <!-- CONTENT -->
-    <div id="app" class="relative z-10 w-full max-w-xl">
-      <!-- SCREEN 1 -->
+    <!-- Main Content -->
+    <div class="relative z-10 w-full max-w-xl">
+      <!-- Screen 1 -->
       <section
         id="screen-start"
         class="bg-white card-shadow rounded-2xl p-8 text-center fade-up"
@@ -78,7 +67,7 @@
           Werey, Happy Birthday oo 🎉
         </h1>
         <p class="mt-3 text-gray-600">
-          Alex and Ope sends you warm wishes today.
+          Some of us sends you warm wishes today oo.
         </p>
 
         <button
@@ -89,7 +78,7 @@
         </button>
       </section>
 
-      <!-- SCREEN 2 -->
+      <!-- Screen 2 -->
       <section
         id="screen-gift"
         class="hidden mt-6 bg-white card-shadow rounded-2xl p-8 text-center fade-up"
@@ -118,12 +107,10 @@
           </div>
         </div>
 
-        <p class="text-sm text-gray-500 mt-4">
-          From Alex and Ope - We Love You
-        </p>
+        <p class="text-sm text-gray-500 mt-4">Designed by Tial - We Love You</p>
       </section>
 
-      <!-- SCREEN 3 -->
+      <!-- Screen 3 -->
       <section
         id="screen-letter"
         class="hidden mt-6 bg-white card-shadow rounded-2xl p-6 text-left fade-up"
@@ -142,7 +129,6 @@
           id="letterContent"
           class="mt-4 text-gray-700 leading-relaxed"
         ></div>
-
         <p id="letterIndex" class="text-center text-gray-400 text-sm mt-4"></p>
       </section>
     </div>
@@ -165,25 +151,13 @@
       const letterIndex = document.getElementById("letterIndex");
 
       const letters = [
-        `Dear Leo,<br><br>
-        Today shines a little brighter because it's your day.
-        Keep being the amazing, strong, handsome animal you are.
-        <br><br><b>All of us sha 💗</b>`,
-
-        `Happy Birthday pelumi!<br><br>
-        You bring joy and light into every room you walk into.
-        Thank you for being you.
-        <br><br>— <b>Ope,  ❤️</b>`,
-
-        `Dear Werey ! 🎉<br><br>
-        You have sence small sha, caring, and full of good energy.
-        We appreciate you more than you know.
-        <br><br>— <b>Alex 💞</b>`,
-
-        `Wishing you laughter, healing, and soft peace in this new age.
-        Your journey is beautiful and still unfolding
-        Continue to have sense oo dont worry we will buy benz soon.
-        <br><br>— <b>Someone Who Believes in You 🌸</b>`,
+        `Dear Leo,<br><br>Today shines a little brighter because it's your day. Keep being the amazing, strong, handsome animal you are.<br><br><b>All of us sha 💗</b>`,
+        `Happy Birthday Pelumi!<br><br>You bring joy and light into every room you walk into. Thank you for being you.<br><br>— <b>Ope ❤️</b>`,
+        `Dear Werey! 🎉<br><br>You have sense small sha, caring, and full of good energy. We appreciate you more than you know.<br><br>— <b>Alex 💞</b>`,
+        `Wishing you laughter, healing, and soft peace in this new age. Continue to have sense oo. Don't worry we will Benz soon sha.<br><br>— <b>Someone Who Believes in You 🌸</b>`,
+        `Happy birthday!Wishing you a birthday filled with laughter,good vibes,unforgettable memories,good friends and most especially answered prayers.
+         My dear I don’t know what to say because words has failed me but all I can say is happy birthday once again!
+         OLOGUNWA OLUWAPELUMI LEO MONININUOLWA RICHARD.<br><br>—If u know you know A friend❤️</b>`,
       ];
 
       let currentIndex = 0;
@@ -230,6 +204,19 @@
         birthdayAudio.pause();
         clearInterval(interval);
       };
+
+      /* ===== BACKGROUND SLIDESHOW ===== */
+      const slideshow = document.querySelector(".slideshow");
+      const slides = ["p1.jpg", "p2.jpg", "p3.jpg", "p4.jpg", "p5.jpg"];
+      let bgIndex = 0;
+
+      function changeBackground() {
+        slideshow.style.backgroundImage = `url('${slides[bgIndex]}')`;
+        bgIndex = (bgIndex + 1) % slides.length;
+      }
+
+      changeBackground();
+      setInterval(changeBackground, 5000);
     </script>
   </body>
 </html>
